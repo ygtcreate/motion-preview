@@ -1,20 +1,16 @@
-# FBX files
+# FBX storage
 
-## Temporary local assets
+FBX binaries are stored in the private Cloudflare R2 bucket
+`motion-preview-fbx`; they are intentionally not committed to Git.
 
-The FBX files in this directory are temporary assets for local development.
-They will be removed from the Git repository after Cloudflare R2 integration.
-In production, FBX files must be stored in R2 and their searchable metadata in
-Cloudflare D1.
+R2 object layout:
 
-Directory layout:
+- `Preview/Character.fbx`: shared preview character.
+- `Motions/Idle.fbx`: idle animation.
+- `Motions/Walking.fbx`: walking animation.
+- `Motions/Jump.fbx`: jump animation.
 
-- `Preview/Character.fbx`: shared preview character (mesh, skeleton, and materials). This file is not offered for download.
-- `Motions/*.fbx`: lightweight animation files applied to the shared character and offered for download.
-
-Set each motion record's `url` to `/assets/FBX/Motions/<filename>.fbx`.
-Only files registered as motion records are shown in the library and download
-UI. The shared character path is configured by
-`PREVIEW_CHARACTER_URL` in `app/components/MotionStudio.tsx`.
-
-For production, configure `MOTION_API_URL`; `/api/motions` will proxy the database-backed motion API without changing the viewer UI.
+The Worker exposes these private objects through `/api/files/<R2 key>`.
+Motion metadata is currently returned by `/api/motions` and will be moved to
+Cloudflare D1. Keep backup copies outside this repository before replacing or
+deleting R2 objects.
