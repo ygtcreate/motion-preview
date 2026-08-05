@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 
 const demoMotions = [
-  { id: "idle-01", name: "Idle", category: "Idle", duration: 8.33, fps: 30, fileSize: "0.75 MB", updatedAt: "2026.07.22", url: "/assets/FBX/Motions/Idle.fbx" },
-  { id: "walk-01", name: "Walking", category: "Walk", duration: 1.03, fps: 30, fileSize: "0.35 MB", updatedAt: "2026.07.22", url: "/assets/FBX/Motions/Walking.fbx" },
-  { id: "jump-01", name: "Jump", category: "Action", duration: 2.60, fps: 30, fileSize: "0.53 MB", updatedAt: "2026.07.22", url: "/assets/FBX/Motions/Jump.fbx" },
+  { id: "idle-01", name: "Idle", category: "Idle", duration: 8.33, fps: 30, fileSize: "0.75 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Idle.fbx" },
+  { id: "walk-01", name: "Walking", category: "Walk", duration: 1.03, fps: 30, fileSize: "0.35 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Walking.fbx" },
+  { id: "jump-01", name: "Jump", category: "Action", duration: 2.60, fps: 30, fileSize: "0.53 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Jump.fbx" },
 ];
 
 export async function GET() {

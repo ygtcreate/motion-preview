@@ -11,5 +11,11 @@
   },
   "images": {
     "binding": "IMAGES"
-  }
+  },
+  "r2_buckets": [
+    {
+      "binding": "MOTION_FILES",
+      "bucket_name": "motion-preview-fbx"
+    }
+  ]
 }

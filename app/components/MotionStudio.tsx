@@ -7,7 +7,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 type Motion = { id: string; name: string; category: string; duration: number; fps: number; fileSize: string; updatedAt: string; url: string | null };
 
-const PREVIEW_CHARACTER_URL = "/assets/FBX/Preview/Character.fbx";
+const PREVIEW_CHARACTER_URL = "/api/files/Preview/Character.fbx";
 
 function Viewer({ motion, playing, speed, loop, onTime }: { motion?: Motion; playing: boolean; speed: number; loop: boolean; onTime: (n: number) => void }) {
   const host = useRef<HTMLDivElement>(null);
