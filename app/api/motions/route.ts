@@ -1,17 +1,29 @@
 import { NextResponse } from "next/server";
+import { asc } from "drizzle-orm";
+import { getDb } from "../../../db";
+import { motions } from "../../../db/schema";
 
-const demoMotions = [
-  { id: "idle-01", name: "Idle", category: "Idle", duration: 8.33, fps: 30, fileSize: "0.75 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Idle.fbx" },
-  { id: "walk-01", name: "Walking", category: "Walk", duration: 1.03, fps: 30, fileSize: "0.35 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Walking.fbx" },
-  { id: "jump-01", name: "Jump", category: "Action", duration: 2.60, fps: 30, fileSize: "0.53 MB", updatedAt: "2026.07.22", url: "/api/files/Motions/Jump.fbx" },
-];
+function formatFileSize(bytes: number) {
+  return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+}
 
 export async function GET() {
-  const endpoint = process.env.MOTION_API_URL;
-  if (endpoint) {
-    const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
-    if (!response.ok) return NextResponse.json({ error: "Motion source unavailable" }, { status: 502 });
-    return NextResponse.json(await response.json());
-  }
-  return NextResponse.json(demoMotions);
+  const rows = await getDb()
+    .select()
+    .from(motions)
+    .orderBy(asc(motions.sortOrder));
+
+  return NextResponse.json(
+    rows.map((motion) => ({
+      id: motion.id,
+      name: motion.name,
+      category: motion.category,
+      duration: motion.duration,
+      fps: motion.fps,
+      fileSize: formatFileSize(motion.fileSize),
+      updatedAt: motion.updatedAt,
+      url: `/api/files/${motion.r2Key}`,
+    })),
+    { headers: { "X-Motion-Source": "cloudflare-d1" } },
+  );
 }

@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1785908934048,
+      "tag": "0000_needy_spiral",
+      "breakpoints": true
+    }
+  ]
 }

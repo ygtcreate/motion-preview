@@ -17,5 +17,13 @@
       "binding": "MOTION_FILES",
       "bucket_name": "motion-preview-fbx"
     }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "motion-preview-db",
+      "database_id": "981a3ecf-6d98-4f93-a148-45167a82f0df",
+      "migrations_dir": "drizzle"
+    }
   ]
 }
